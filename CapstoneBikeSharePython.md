@@ -415,7 +415,7 @@ ax = sns.barplot(x='member_casual',
 ax.set(title="the sum of each member and casual", xlabel = "member and casual", ylabel = "sum of ride length")
 
 ```
-[img]("~ch1.png)
+
 
 
 
