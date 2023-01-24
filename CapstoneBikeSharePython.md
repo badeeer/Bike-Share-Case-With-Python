@@ -87,5 +87,288 @@ df_12 = pd.read_csv("/content/drive/MyDrive/dataset/divvy-tripdata_202208.csv")
 
 ```
 
+#### 1.Before wrangling dataset we will concatenate all the datatset into one then remove the 12 dataset 
+
+we doing that because we need more RAM
+
+```
+#concate the all dataset into one 
+df = pd.concat([df_01, df_02, df_03, df_04, df_05, df_06, df_07, df_08, df_09, df_10,
+               df_11, df_12])
+   
+```
+Save df to  pickle, for computation reasons then read pickle file 
+
+```
+#save df to pickle 
+df.to_pickle("./bike.pkl")
+
+```
+```
+# read pickle file 
+bike = pd.read_pickle('bike.pkl')
+bike.head()
+
+```
+delete all df_01, to df_12 and df 
+
+```
+delete all 
+del df_01
+gc.collect()
+ 
+del df_02
+gc.collect()
+
+del df_03
+gc.collect()
+
+del df_04
+gc.collect()
+
+del df_05
+gc.collect()
+
+del df_06
+gc.collect()
+
+del df_07
+gc.collect()
+
+del df_08
+gc.collect()
+
+del df_09
+gc.collect()
+
+del df_10
+gc.collect()
+
+del df_11
+
+gc.collect()
+
+del df_12
+gc.collect()
+
+del df
+gc.collect()
+
+```
+2. see if we have the same columns in all dataset
+
+```
+#bike columns
+bike.columns 
+
+```
+3. A Structure dataset, we want to see each column and it's a datatype
+
+```
+#dtypes
+bike.dtypes
+
+```
+dataset have the same columns ***(ride_id, rideable_type, started_at, ended_at, start_station_name, start_station_id, end_station_id, start_lat, start_lng, end_lat, end_lng, member_casual)***,  I didn't to rename some dataset's becaue they have same columns name
+
+## STEP THREE: PROCESSING
+
+After combining all datasets into one, first clean the df dataset by the filter's out the duplicated value and looking for missing numeric values, after that, I will add more columns that beneficial to my analysis.
+
+#### 1- remove the duplicated value
+
+```
+#df, ride_id duplicated
+print(sum(bike['ride_id'].duplicated()))
+
+```
+
+-as you can see there's no duplication in ride_id, so now let's keep forward and deal with the missing value
+
+#### 2- check if there is a missing value.
+
+```
+#df missing value for ride_id
+print(sum(bike.ride_id.isnull()))
+
+#df missing value for rideable_type
+print(sum(bike.rideable_type.isnull()))
+
+#df missing value for started_at 
+print(sum(bike.started_at.isnull()))
+
+#df missing value for ended_at
+print(sum(bike.ended_at.isnull()))
+
+#df missing value for start_station_name
+print(sum(bike.start_station_name.isnull()))
+
+#df missing value for start_station_id
+print(sum(bike.start_station_id.isnull()))
+
+#df missing value for end_station_name
+print(sum(bike.end_station_name.isnull()))
+
+#df missing value for end_station_id
+print(sum(bike.end_station_id.isnull()))
+
+#df missing value for start_lat
+print(sum(bike.start_lat.isnull()))
+
+#dfmissing value for start_lng
+print(sum(bike.start_lng.isnull()))
+
+#dfmissing value for end_lat
+print(sum(bike.end_lat.isnull()))
+
+#df missing value for end_lng
+print(sum(bike.end_lng.isnull()))
+
+#df missing value for member_casual
+print(sum(bike.member_casual.isnull()))
+
+```
+The df columns missing value is **start_station_name, start_station_id, end_station_name, end_station_id, end_lat, end_lng**
+
+ #### 3- filling the missing 
+ let's filling each dataset missing value by first looking for the datatype and filling the null in terms of thier datatype.
+ 
+ ```
+ #fillna
+bike["start_station_name"].ffill(axis=0, inplace=True)
+bike["start_station_name"].bfill(axis=0, inplace=True)
+bike["start_station_id"].ffill(axis=0, inplace=True)
+bike["start_station_id"].bfill(axis=0, inplace=True)
+bike["end_station_name"].ffill(axis=0, inplace=True)
+bike["end_station_name"].bfill(axis=0, inplace=True)
+bike["end_station_id"].ffill(axis=0, inplace=True)
+bike["end_station_id"].bfill(axis=0, inplace=True)
+bike["end_lat"].ffill(axis=0, inplace=True)
+bike["end_lat"].bfill(axis=0, inplace=True)
+bike["end_lng"].ffill(axis=0, inplace=True)
+bike["end_lng"].bfill(axis=0, inplace=True)
+
+```
+
+##### 4- Data varification
+check if there is duplication and missing value 
+
+```
+#duplucation
+print(sum(bike['ride_id'].duplicated()))
+
+```
+
+```
+#df missing value for ride_id
+print(sum(bike.ride_id.isnull()))
+
+#df missing value for rideable_type
+print(sum(bike.rideable_type.isnull()))
+
+#df missing value for started_at 
+print(sum(bike.started_at.isnull()))
+
+#df missing value for ended_at
+print(sum(bike.ended_at.isnull()))
+
+#df missing value for start_station_name
+print(sum(bike.start_station_name.isnull()))
+
+#df missing value for start_station_id
+print(sum(bike.start_station_id.isnull()))
+
+#df missing value for end_station_name
+print(sum(bike.end_station_name.isnull()))
+
+#df missing value for end_station_id
+print(sum(bike.end_station_id.isnull()))
+
+#df missing value for start_lat
+print(sum(bike.start_lat.isnull()))
+
+#dfmissing value for start_lng
+print(sum(bike.start_lng.isnull()))
+
+#dfmissing value for end_lat
+print(sum(bike.end_lat.isnull()))
+
+#df missing value for end_lng
+print(sum(bike.end_lng.isnull()))
+
+#df missing value for member_casual
+print(sum(bike.member_casual.isnull()))
+
+```
+
+##### 5. create more columns
+5.1. converting the started_at and ended_at DateTime datatype and splitting into the day, month, year, and day of the week.
+
+```
+#convert the dataframe
+#started_at, ended_at to datetime 
+bike['started_at'] = pd.to_datetime(bike['started_at'])
+bike['ended_at'] = pd.to_datetime(bike['ended_at'])
+bike['day'] = bike['started_at'].dt.day
+bike['month'] = bike['started_at'].dt.month
+bike['year'] = bike['started_at'].dt.year
+bike['day_of_week'] = bike['started_at'].dt.day_name()
+bike['hour'] = bike['started_at'].dt.hour
+bike['minute'] = bike['started_at'].dt.minute
+bike['second'] = bike['started_at'].dt.second
+bike.head()
+
+```
+
+5.2. Add another column to ride_length by calculating the difference between ended_at and started_at, convert the datatype of ride_length, and than check if ride_length is float
+
+```
+#difference betwee the ended_at and started_at
+bike['ride_length'] = bike['ended_at'] - bike['started_at']
+bike['ride_length'] = bike['ride_length'].dt.total_seconds()
+
+#to_numeric, head, dtypes
+bike['ride_length'] = bike['ride_length'].astype(np.float64)
+print(bike.head())
+print(bike.dtypes)
+
+```
+chek if there is negative value in ride_length, and fixed it 
+
+```
+#error's in ride_length 
+sum(bike['ride_length'] < 0)
+
+#convert the negative to positive 
+bike['ride_length'] = bike['ride_length'].abs()
+
+```
+
+6 -  let's see if more then casual and member in member_casual, and I doing some calculation.
+
+```
+set(bike['member_casual'])
+
+```
+
+In member_casual there are two category object, the casual and member.
+
+After this long step of processing data, now I can do the analysis step.
+
+ ## STEP FOUR: ANALYSIS
+ 
+-Before jumping to the analysis, let's take the summary, structure, number of columns.
+ 
+
+ ```
+ #head, describe(), dtypes, columns
+print(bike.head())
+print(bike.describe())
+print(bike.dtypes)
+print(bike.columns)
+
+```
+
+ 
 
 
