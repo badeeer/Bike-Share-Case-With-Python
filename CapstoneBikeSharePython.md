@@ -369,6 +369,57 @@ print(bike.columns)
 
 ```
 
+How many percentage of each category in member_casual? 
+but before seen the percentage of each category we should convert the datatype of member_casaul first
+
+```
+#convert to category 
+bike['member_casual'] = bike['member_casual'].astype("category")
+bike.dtypes
+
+```
+the count and the percentage of each category in member_casual
+
+```
+print(bike['member_casual'].value_counts())
+print(len(bike['member_casual']))
+count = bike['member_casual'].value_counts()
+lenth = len(bike['member_casual'])
+print((count/lenth)*100)
+
+```
+
+-**FINDING (1)**
+
+- In general, in the  above the casual have great (mean, max, sum) values, and they also varied (standard deviation) than members even if the count and percentage of member are more by near to 58% of the member greater than casual, maybe this is because there are a few users casuals (42%) using the bike's for a long ride but they are not a member.
+
+Using **pivot table** to sumarise the mean, sum, std, max and min 
+
+```
+table = pd.pivot_table(bike, values=['ride_length'], index=['member_casual'],
+                     aggfunc=[np.mean, np.sum, np.std, max, min])
+print(table)
+
+```
+-**FINDING (2)**
+- > here in the table above we can take an intuition about why the mean of casual is greater than member but the number of rides is way less than that of the member, that's because the ride length sum of casual(4339343000) is greater of the ride sum of member(2633702000). conversely, the length of rides of casual is less than the ride length of the member, this explains why the mean of the casual ride is greater than that of member.
+
+chart(1): the sum of each member and casual
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='member_casual', 
+            y='ride_length', data=bike, 
+            estimator=sum, palette='viridis')
+
+ax.set(title="the sum of each member and casual", xlabel = "member and casual", ylabel = "sum of ride length")
+
+```
+![The Chart One!](~Documents/BikesharePython/ch1.png)
+
+
+
+
  
 
 
