@@ -415,7 +415,7 @@ ax = sns.barplot(x='member_casual',
 ax.set(title="the sum of each member and casual", xlabel = "member and casual", ylabel = "sum of ride length")
 
 ```
-<img src="~Documents/bikeshrePython/ch1.png>
+<img src="~Documents/capstoneBikesharePython/ch1.png>
 
 
 
