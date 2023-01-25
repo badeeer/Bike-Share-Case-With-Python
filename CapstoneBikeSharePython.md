@@ -568,9 +568,59 @@ ax.set(title = "The average ride of each the member and casual over the days",
 ![chapter07](images/ch7.png)
 
 
- 
+-chart(8): The total ride of each the member and casual over the days
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='day', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10", estimator=sum)
+
+ax.set(title = "The total ride of each the member and casual over the days", 
+       xlabel = "days", ylabel = "total ride")
        
+```       
+![chapter08](images/ch8.png)
 
+Let's see the behaviour of member and casual in months.
 
+```
+table = bike.groupby(['month', 'member_casual']).agg({'ride_length':['sum', 'mean']})
+table.sort_values
 
+```
 
+- > the sum value for casual is 713316133 located in July, and mean is 1957.35 located at March.
+- > the sum value for member is 343592953.0 in July, and thier mean is 839.98 at June.
+
+- chart(9): The averge ride of each the member and casual over the Months.
+
+```
+
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='month', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10",)
+
+ax.set(title = "The averge ride of each the member and casual over the Months", 
+       xlabel = "months", ylabel = "average ride")
+       
+```
+
+![chapter09](images/ch9.png)
+
+chart(10): The Total ride  of each the member and casual over the Months
+
+```
+
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='month', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10", estimator=sum)
+
+ax.set(title = "The sum ride of each the member and casual over the Months", 
+       xlabel = "months", ylab "average ride")
+       
+```
+
+![chapter10](images/ch10.png)
