@@ -416,7 +416,7 @@ ax.set(title="the sum of each member and casual", xlabel = "member and casual", 
 
 ```
 
-
+![chart 1](images/ch1.png)
 
 
 
