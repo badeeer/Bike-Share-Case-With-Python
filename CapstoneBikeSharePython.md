@@ -418,7 +418,24 @@ ax.set(title="the sum of each member and casual", xlabel = "member and casual", 
 
 ![chart 1](images/ch1.png)
 
+-**FINDING (3)**
+- > As you can see in chart(1)  above, the sum of casual are  more than the sum of casual.
 
+**chart(2)**
+
+- the mean of ride length of each member and casual.
+
+```
+
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='member_casual', 
+                 y='ride_length',  
+                  data=bike, palette="husl")
+ax.set(title = "The total of ride over the member and casual", xlabel = "member and casual", ylabel = "Total ride")
+
+```
+
+![chart_2](images/ch2.png)
 
  
 
