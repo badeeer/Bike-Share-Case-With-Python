@@ -516,5 +516,4 @@ ax.set(title = "The average ride of each the member and casual over the day  of 
      
 ```
 
-![chapter5](images/ch5.png)
-
+![chapter05](images/ch5.png)
