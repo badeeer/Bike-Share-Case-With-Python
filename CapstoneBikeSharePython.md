@@ -518,4 +518,59 @@ ax.set(title = "The average ride of each the member and casual over the day  of 
 
 ![chapter05](images/ch5.png)
 
+-**Finding(9):**
+
+- > the memeber didn't exceed the mean of 1000 through out all seven days 
+- > the casual are more varied secailly in sunday.
+
+chart(6): The sum ride of each the member and casual over the days of week.
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='day_of_week', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10", estimator=sum)
+ax.set(title = "The total ride of each the member and casual over the day  of week", 
+       xlabel = "day of week", ylabel = "Total ride")
+   
+ ```
+ 
+![chapter06](images/ch6.png)
+
+-**Finding(10)**
+
+- > as you can see the chart(5) the highest value of ride are in Saturday and for casual, and wednesday for member.
+
+##### let's see how the member and casual are behave differently in days 
+
+```
+table = bike.groupby(['day', 'member_casual']).agg({'ride_length':['sum',  'mean']})
+
+```
+
+-Finding(11): 
+
+ - The sum value  of causal is 195326017.0 located in day 10 , and the mean of it is 2009.04 in day five.
+ - Day 12 is highest sum value for member is 102655507.0	and thier greater mean is 803.23 located in day five 
+
+chart(7): The average ride of each the member and casual over the days.
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='day', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10")
+ax.set(title = "The average ride of each the member and casual over the days", 
+       xlabel = "days", ylabel = "avreage ride")
+       
+```
+
+![chapter07](images/ch7.png)
+
+
+ 
+       
+
+
+
 
