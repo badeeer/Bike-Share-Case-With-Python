@@ -470,4 +470,21 @@ ax.set(title = "The average ride of each the member and casual over the hour of 
 ```
 ![chart_3](images/ch3.png)
 
+-**FINDING (6)**.
+- > In the chart(3): there some pickes specaily in 3 am with highest error bars varaition, 
+and that indicate to the high demand from casual customer 
+
+chart(4): The sum ride of each the member and casual over the hour of day.
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='hour', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="husl", estimator=sum)
+ax.set(title = "The average ride of each the member and casual over the hour of day ", 
+       xlabel = "hour", ylabel = "Total ride")
+       
+```
+![chapter04](images/ch4.png)
+
 
