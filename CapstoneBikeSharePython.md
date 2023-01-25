@@ -624,3 +624,11 @@ ax.set(title = "The sum ride of each the member and casual over the Months",
 ```
 
 ![chapter10](images/ch10.png)
+
+
+**RECOMMENDATIONS**
+
+-Based on the findings 
+- > first thing of my recommendations is we need to do more surveys on times that the casual is more or equal to member because it is important to know why some casual users didn't prefer to be casual 
+- > we need to do some marketing campings at times that there huge demand by casual 
+- > offer some discount for the membership especially for long rides and during summer and increasing the cost of casual for the long ride
