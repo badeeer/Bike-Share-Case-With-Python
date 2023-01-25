@@ -437,6 +437,37 @@ ax.set(title = "The total of ride over the member and casual", xlabel = "member 
 
 ![chart_2](images/ch2.png)
 
- 
+-**FINDING (4)**
+
+- > In chart(2), the mean ride length of the casual is up to 1500, while the member didn't reach 1000.
+
+Now let's see the comparison of ride length in member and casual at hours.
+
+```
+table = bike.groupby(['hour', 'member_casual']).agg({'ride_length':['sum', 'mean']})
+table.sort_values
+
+```
+
+**-FINDING (5)**
+
+- The sum value of casual is **376053750** at five pm, (**17:00**), and the mean of it is 2448.15 at three am (**3**)
+- The max vaule of member is **290209836** at five pm (**17:00**), and the mean value of the member is 838.9 , the same as casual at three am (**3**)
+
+Lets make visual chart of what we say above. 
+by first the mean or the average ride of both member and casual over the hour of a day, then seen the sum ride of each member and casual over hour of a day. 
+
+chart(3): The average ride of each the member and casual over the hour of day.
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='hour', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="husl")
+ax.set(title = "The average ride of each the member and casual over the hour of day ", 
+       xlabel = "hour", ylabel = "average ride")
+
+```
+![chart_3](images/ch3.png)
 
 
