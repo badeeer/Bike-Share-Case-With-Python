@@ -487,4 +487,34 @@ ax.set(title = "The average ride of each the member and casual over the hour of 
 ```
 ![chapter04](images/ch4.png)
 
+-**Finding(7):**
+
+- > In the chart(4): the demand keep increasing from 7 am to 8 pm for both member and casual. 
+
+-compare the casual and member at weekday.
+
+```
+table = bike.groupby(['day_of_week', 'member_casual']).agg({'ride_length':['sum', 'mean']})
+table.sort_values
+
+```
+
+-**Finding(8):**
+- > the max sum value for casual is 980528463 at Saturday, and mean at 2051.2 at Sunday.
+
+-> the max sum value for member is 400297111  in Wednesday and the mean also at Sunday by 865.52
+
+chart(5): The average ride of each the member and casual over the days of week.
+
+```
+plt.figure(figsize=(10,8))
+ax = sns.barplot(x='day_of_week', 
+                 y='ride_length', hue='member_casual',  
+                  data=bike, palette="tab10")
+ax.set(title = "The average ride of each the member and casual over the day  of week", 
+       xlabel = "day of week", ylabel = "avreage ride")
+     
+```
+
+![chapter5](images/ch5)
 
