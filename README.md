@@ -9,6 +9,7 @@ In 2016, **Cyclistic** launched a successful bike-share offering. Since then, th
 ### Business task:
 Analyze the Cyclistic data set for one year to understand how annual members and casual riders use Cyclistic bikes differently.
 
+
 ### Stakeholders:
 
 **Lily Moreno**: The director of marketing. Moreno is responsible for the development of campaigns and initiatives to promote the bike-share program.
